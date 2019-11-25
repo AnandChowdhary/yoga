@@ -5506,6 +5506,11 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
+rn-apple-healthkit@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/rn-apple-healthkit/-/rn-apple-healthkit-0.7.3.tgz#4007bfc735ffe276db46df87f545ba14519f8077"
+  integrity sha512-VfVTRleD3QhxA3DM5MQ6eSVsXgWILYb88zBjVt/vp3b3LZ2GWlfh3y9aQmfQTBtF+QpW6qWANmTr+vJdz8BD0g==
+
 rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
