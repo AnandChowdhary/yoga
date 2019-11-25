@@ -18,7 +18,6 @@ import {
 import AppleHealthKit from 'rn-apple-healthkit';
 
 import {
-  Header,
   Colors
 } from 'react-native/Libraries/NewAppScreen';
 import { getAlLData } from './healthkit';
@@ -56,19 +55,23 @@ const getHealthData = () => {
     AppleHealthKit.initHealthKit(options, error => {
       if (error) return reject(error);
       getAlLData()
-        .then(data => console.log("GOT ALL HEALTH DATA", data))
-        .catch(error => console.log("GOT AN ERROR", error));
+        .then(data => {
+          console.log("GOT ALL HEALTH DATA", data);
+        })
+        .catch(() => alert("Unable to fetch data"));
     });
   });
 }
 
 const App: () => React$Node = () => {
-  getHealthData()
-    .then(data => {
-      console.log("I got health data", data);
-    }).catch(error => {
-      console.log("I got error", error);
-    })
+  const saveData = () => {
+    getHealthData()
+      .then(data => {
+        console.log("I got health data", data);
+      }).catch(error => {
+        console.log("I got error", error);
+      })
+  };
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -76,7 +79,6 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
