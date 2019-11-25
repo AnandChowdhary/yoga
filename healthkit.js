@@ -12,7 +12,9 @@ export const getAlLData = () =>
   new Promise((resolve, reject) => {
     const now = new Date();
     now.setHours(0, 0, 0, 0);
-    const startDate = now.toISOString();
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
+    const startDate = new Date(currentDate).toISOString();
     const endDate = new Date().toISOString();
     const result = {};
     const getData = (func, param, name) =>

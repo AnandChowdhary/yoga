@@ -115,8 +115,6 @@ const getHealthData = () => {
 const send = data =>
   new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
-    console.log("SENDING", data);
-    return resolve();
     request.open('POST', ENDPOINT, true);
     request.addEventListener('load', () =>
       resolve(JSON.parse(request.responseText).url),
