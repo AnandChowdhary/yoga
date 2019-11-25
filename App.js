@@ -67,20 +67,22 @@ const getHealthData = () => {
   });
 };
 
-const send = (data) => new Promise((resolve, reject) => {
-  const request = new XMLHttpRequest();
-  request.open("POST", ENDPOINT, true);
-  request.addEventListener("load", () =>
-    resolve(JSON.parse(request.responseText).url)
-  );
-  request.addEventListener("error", () => reject("response_not_ok"));
-  request.addEventListener("abort", () => reject("upload_aborted"));
-  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request.send(JSON.stringify(data));
-});
+const send = data =>
+  new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('POST', ENDPOINT, true);
+    request.addEventListener('load', () =>
+      resolve(JSON.parse(request.responseText).url),
+    );
+    request.addEventListener('error', () => reject('response_not_ok'));
+    request.addEventListener('abort', () => reject('upload_aborted'));
+    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    request.send(JSON.stringify(data));
+  });
 
 const App: () => React$Node = () => {
   const [lastTriggered, setLastTriggered] = useState(null);
+  const [working, setWorking] = useState(false);
   useEffect(() => {
     AsyncStorage.getItem('lastTriggered')
       .then(val => {
@@ -120,18 +122,22 @@ const App: () => React$Node = () => {
                 <Text style={styles.highlight}>HealthKit </Text>
                 and sends it to your favorite webhook for storage.
               </Text>
-              <Text
-                style={{
-                  paddingTop: '5%',
-                  paddingBottom: '25%',
-                }}>
-                Last Triggered:{' '}
-                {lastTriggered ? (
-                  <Text>{timeAgo.format(lastTriggered)}</Text>
-                ) : (
-                  <Text>Never</Text>
-                )}
-              </Text>
+              {working ? (
+                <Text>Working...</Text>
+              ) : (
+                <Text
+                  style={{
+                    paddingTop: '5%',
+                    paddingBottom: '25%',
+                  }}>
+                  Last Triggered:{' '}
+                  {lastTriggered ? (
+                    <Text>{timeAgo.format(lastTriggered)}</Text>
+                  ) : (
+                    <Text>Never</Text>
+                  )}
+                </Text>
+              )}
               <Button onPress={saveData} title="Trigger" />
             </View>
           </View>
