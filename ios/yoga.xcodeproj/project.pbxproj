@@ -302,7 +302,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = Z756XZAX8W;
+						DevelopmentTeam = 7F544XGF2W;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -647,7 +647,7 @@
 				CODE_SIGN_ENTITLEMENTS = yoga/yoga.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = Z756XZAX8W;
+				DEVELOPMENT_TEAM = 7F544XGF2W;
 				INFOPLIST_FILE = yoga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -655,7 +655,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.oswaldlabs.yoga;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oswaldlabs.yoga;
 				PRODUCT_NAME = yoga;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -668,7 +668,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = yoga/yoga.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z756XZAX8W;
+				DEVELOPMENT_TEAM = 7F544XGF2W;
 				INFOPLIST_FILE = yoga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -676,7 +676,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.oswaldlabs.yoga;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oswaldlabs.yoga;
 				PRODUCT_NAME = yoga;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
