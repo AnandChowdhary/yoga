@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,14 +15,12 @@ import {
   Text,
   StatusBar,
   Button,
-  AsyncStorage
+  AsyncStorage,
 } from 'react-native';
 import AppleHealthKit from 'rn-apple-healthkit';
 
-import {
-  Colors
-} from 'react-native/Libraries/NewAppScreen';
-import { getAlLData } from './healthkit';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {getAlLData} from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
@@ -54,9 +52,9 @@ const getHealthData = () => {
           PERMISSIONS.StepCount,
           PERMISSIONS.Steps,
           PERMISSIONS.Weight,
-          PERMISSIONS.BodyFatPercentage
-        ]
-      }
+          PERMISSIONS.BodyFatPercentage,
+        ],
+      },
     };
     AppleHealthKit.initHealthKit(options, error => {
       if (error) return reject(error);
@@ -64,29 +62,31 @@ const getHealthData = () => {
         .then(data => {
           resolve(data);
         })
-        .catch((error) => reject(error));
+        .catch(error => reject(error));
     });
   });
-}
+};
 
 const App: () => React$Node = () => {
   const [lastTriggered, setLastTriggered] = useState(null);
   useEffect(() => {
-    AsyncStorage.getItem("lastTriggered")
+    AsyncStorage.getItem('lastTriggered')
       .then(val => {
-        console.log(val, "GOT VALUE", new Date());
+        console.log(val, 'GOT VALUE', new Date());
         if (val) setLastTriggered(new Date(parseInt(val)));
       })
-      .catch(() => {})
+      .catch(() => {});
   }, []);
   const saveData = () => {
     getHealthData()
-    .then(data => {
-      // console.log("I got health data", data);
-    })
+      .then(data => {
+        // console.log("I got health data", data);
+      })
       .then(() => setLastTriggered(new Date()))
-      .then(() => AsyncStorage.setItem("lastTriggered", new Date().getTime().toString()))
-      .catch(() => alert("I got an error in saving this data"))
+      .then(() =>
+        AsyncStorage.setItem('lastTriggered', new Date().getTime().toString()),
+      )
+      .catch(() => alert('I got an error in saving this data'));
   };
   return (
     <>
@@ -104,17 +104,22 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Yoga</Text>
               <Text style={styles.sectionDescription}>
-                Yoga find your health data using <Text style={styles.highlight}>HealthKit </Text>
+                Yoga find your health data using{' '}
+                <Text style={styles.highlight}>HealthKit </Text>
                 and sends it to your favorite webhook for storage.
               </Text>
-              <Text style={{
-                paddingTop: "5%",
-                paddingBottom: "25%"
-              }}>Last Triggered: {
-                lastTriggered ?
-                  <Text>{timeAgo.format(lastTriggered)}</Text> :
+              <Text
+                style={{
+                  paddingTop: '5%',
+                  paddingBottom: '25%',
+                }}>
+                Last Triggered:{' '}
+                {lastTriggered ? (
+                  <Text>{timeAgo.format(lastTriggered)}</Text>
+                ) : (
                   <Text>Never</Text>
-              }</Text>
+                )}
+              </Text>
               <Button onPress={saveData} title="Trigger" />
             </View>
           </View>
