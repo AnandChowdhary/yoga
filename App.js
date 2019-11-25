@@ -24,6 +24,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import { getAlLData } from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 const getHealthData = () => {
   return new Promise((resolve, reject) => {
@@ -108,7 +112,7 @@ const App: () => React$Node = () => {
                 paddingBottom: "25%"
               }}>Last Triggered: {
                 lastTriggered ?
-                  <Text>{lastTriggered.toLocaleString()}</Text> :
+                  <Text>{timeAgo.format(lastTriggered)}</Text> :
                   <Text>Never</Text>
               }</Text>
               <Button onPress={saveData} title="Trigger" />

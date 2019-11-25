@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "javascript-time-ago": "^2.0.4",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "rn-apple-healthkit": "^0.7.3"
