@@ -21,6 +21,7 @@ import AppleHealthKit from 'rn-apple-healthkit';
 const ENDPOINT = 'https://services.anandchowdhary.now.sh/api/yoga';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getAlLData} from './healthkit';
+import BackgroundFetch from 'react-native-background-fetch';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
@@ -89,6 +90,34 @@ const App: () => React$Node = () => {
         if (val) setLastTriggered(new Date(parseInt(val)));
       })
       .catch(() => {});
+    BackgroundFetch.configure(
+      {
+        minimumFetchInterval: 15,
+        stopOnTerminate: false,
+        startOnBoot: true,
+      },
+      () => {
+        console.log('[js] Received background-fetch event');
+        getHealthData()
+          .then(data => send(data))
+          .then(() =>
+            AsyncStorage.setItem(
+              'lastTriggered',
+              new Date().getTime().toString(),
+            ),
+          )
+          .catch(error => {
+            console.log('ERROR', error);
+            alert('I got an error in saving this data');
+          })
+          .then(() =>
+            BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA),
+          );
+      },
+      error => {
+        console.log('[js] RNBackgroundFetch failed to start');
+      },
+    );
   }, []);
   const saveData = () => {
     if (lastTriggered) {
