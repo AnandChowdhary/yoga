@@ -15,7 +15,6 @@ import {
   Text,
   StatusBar,
   Button,
-  AsyncStorage,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppleHealthKit from 'rn-apple-healthkit';
