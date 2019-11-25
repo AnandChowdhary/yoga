@@ -15,16 +15,60 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import AppleHealthKit from 'rn-apple-healthkit';
 
 import {
   Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
+  Colors
 } from 'react-native/Libraries/NewAppScreen';
+import { getAlLData } from './healthkit';
+const PERMISSIONS = AppleHealthKit.Constants.Permissions;
+
+const getHealthData = () => {
+  return new Promise((resolve, reject) => {
+    let options = {
+      permissions: {
+        read: [
+          PERMISSIONS.ActiveEnergyBurned,
+          PERMISSIONS.BasalEnergyBurned,
+          PERMISSIONS.BiologicalSex,
+          PERMISSIONS.BloodGlucose,
+          PERMISSIONS.BloodPressureDiastolic,
+          PERMISSIONS.BloodPressureSystolic,
+          PERMISSIONS.BodyMassIndex,
+          PERMISSIONS.BodyTemperature,
+          PERMISSIONS.DateOfBirth,
+          PERMISSIONS.DistanceCycling,
+          PERMISSIONS.DistanceWalkingRunning,
+          PERMISSIONS.FlightsClimbed,
+          PERMISSIONS.HeartRate,
+          PERMISSIONS.Height,
+          PERMISSIONS.LeanBodyMass,
+          PERMISSIONS.RespiratoryRate,
+          PERMISSIONS.SleepAnalysis,
+          PERMISSIONS.StepCount,
+          PERMISSIONS.Steps,
+          PERMISSIONS.Weight,
+          PERMISSIONS.BodyFatPercentage
+        ]
+      }
+    };
+    AppleHealthKit.initHealthKit(options, error => {
+      if (error) return reject(error);
+      getAlLData()
+        .then(data => console.log("GOT ALL HEALTH DATA", data))
+        .catch(error => console.log("GOT AN ERROR", error));
+    });
+  });
+}
 
 const App: () => React$Node = () => {
+  getHealthData()
+    .then(data => {
+      console.log("I got health data", data);
+    }).catch(error => {
+      console.log("I got error", error);
+    })
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -46,25 +90,6 @@ const App: () => React$Node = () => {
                 screen and then come back to see your edits.
               </Text>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
