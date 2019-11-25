@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,6 +14,8 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
+  AsyncStorage
 } from 'react-native';
 import AppleHealthKit from 'rn-apple-healthkit';
 
@@ -56,21 +58,31 @@ const getHealthData = () => {
       if (error) return reject(error);
       getAlLData()
         .then(data => {
-          console.log("GOT ALL HEALTH DATA", data);
+          resolve(data);
         })
-        .catch(() => alert("Unable to fetch data"));
+        .catch((error) => reject(error));
     });
   });
 }
 
 const App: () => React$Node = () => {
+  const [lastTriggered, setLastTriggered] = useState(null);
+  useEffect(() => {
+    AsyncStorage.getItem("lastTriggered")
+      .then(val => {
+        console.log(val, "GOT VALUE", new Date());
+        if (val) setLastTriggered(new Date(parseInt(val)));
+      })
+      .catch(() => {})
+  }, []);
   const saveData = () => {
     getHealthData()
-      .then(data => {
-        console.log("I got health data", data);
-      }).catch(error => {
-        console.log("I got error", error);
-      })
+    .then(data => {
+      // console.log("I got health data", data);
+    })
+      .then(() => setLastTriggered(new Date()))
+      .then(() => AsyncStorage.setItem("lastTriggered", new Date().getTime().toString()))
+      .catch(() => alert("I got an error in saving this data"))
   };
   return (
     <>
@@ -86,11 +98,20 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
+              <Text style={styles.sectionTitle}>Yoga</Text>
               <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
+                Yoga find your health data using <Text style={styles.highlight}>HealthKit </Text>
+                and sends it to your favorite webhook for storage.
               </Text>
+              <Text style={{
+                paddingTop: "5%",
+                paddingBottom: "25%"
+              }}>Last Triggered: {
+                lastTriggered ?
+                  <Text>{lastTriggered.toLocaleString()}</Text> :
+                  <Text>Never</Text>
+              }</Text>
+              <Button onPress={saveData} title="Trigger" />
             </View>
           </View>
         </ScrollView>
