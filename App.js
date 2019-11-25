@@ -17,9 +17,9 @@ import {
   Button,
   AsyncStorage,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import AppleHealthKit from 'rn-apple-healthkit';
 const ENDPOINT = "http://services.anandchowdhary.now.sh/api/get-user";
-
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getAlLData} from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
