@@ -36,6 +36,8 @@ target 'yoga' do
 
   pod 'RCTAppleHealthKit', :path => '../node_modules/rn-apple-healthkit'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'yogaTests' do
     inherit! :search_paths
     # Pods for testing
