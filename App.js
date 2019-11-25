@@ -91,6 +91,11 @@ const App: () => React$Node = () => {
       .catch(() => {});
   }, []);
   const saveData = () => {
+    if (lastTriggered) {
+      if (new Date().getTime() - new Date(lastTriggered).getTime() < 82800000)
+        return;
+    }
+    setWorking(true);
     getHealthData()
       .then(data => send(data))
       .then(() => setLastTriggered(new Date()))
@@ -100,7 +105,8 @@ const App: () => React$Node = () => {
       .catch(error => {
         console.log('ERROR', error);
         alert('I got an error in saving this data');
-      });
+      })
+      .then(() => setWorking(false));
   };
   return (
     <>
