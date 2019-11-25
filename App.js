@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppleHealthKit from 'rn-apple-healthkit';
-const ENDPOINT = 'https://services.anandchowdhary.now.sh/api/get-user';
+const ENDPOINT = 'https://services.anandchowdhary.now.sh/api/yoga';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getAlLData} from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
