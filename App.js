@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppleHealthKit from 'rn-apple-healthkit';
-const ENDPOINT = 'http://services.anandchowdhary.now.sh/api/get-user';
+const ENDPOINT = 'https://services.anandchowdhary.now.sh/api/get-user';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getAlLData} from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
@@ -67,6 +67,18 @@ const getHealthData = () => {
   });
 };
 
+const send = (data) => new Promise((resolve, reject) => {
+  const request = new XMLHttpRequest();
+  request.open("POST", ENDPOINT, true);
+  request.addEventListener("load", () =>
+    resolve(JSON.parse(request.responseText).url)
+  );
+  request.addEventListener("error", () => reject("response_not_ok"));
+  request.addEventListener("abort", () => reject("upload_aborted"));
+  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request.send(JSON.stringify(data));
+});
+
 const App: () => React$Node = () => {
   const [lastTriggered, setLastTriggered] = useState(null);
   useEffect(() => {
@@ -78,17 +90,7 @@ const App: () => React$Node = () => {
   }, []);
   const saveData = () => {
     getHealthData()
-      .then(data =>
-        fetch({
-          method: 'POST',
-          url: ENDPOINT,
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        }),
-      )
+      .then(data => send(data))
       .then(() => setLastTriggered(new Date()))
       .then(() =>
         AsyncStorage.setItem('lastTriggered', new Date().getTime().toString()),
