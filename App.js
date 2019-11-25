@@ -114,7 +114,7 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Yoga</Text>
               <Text style={styles.sectionDescription}>
-                Yoga find your health data using{' '}
+                Yoga finds your health data using{' '}
                 <Text style={styles.highlight}>HealthKit </Text>
                 and sends it to your favorite webhook for storage.
               </Text>
