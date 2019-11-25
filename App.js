@@ -33,27 +33,71 @@ const getHealthData = () => {
     let options = {
       permissions: {
         read: [
-          PERMISSIONS.ActiveEnergyBurned,
-          PERMISSIONS.BasalEnergyBurned,
-          PERMISSIONS.BiologicalSex,
-          PERMISSIONS.BloodGlucose,
-          PERMISSIONS.BloodPressureDiastolic,
-          PERMISSIONS.BloodPressureSystolic,
-          PERMISSIONS.BodyMassIndex,
-          PERMISSIONS.BodyTemperature,
-          PERMISSIONS.DateOfBirth,
-          PERMISSIONS.DistanceCycling,
-          PERMISSIONS.DistanceWalkingRunning,
-          PERMISSIONS.FlightsClimbed,
-          PERMISSIONS.HeartRate,
-          PERMISSIONS.Height,
-          PERMISSIONS.LeanBodyMass,
-          PERMISSIONS.RespiratoryRate,
-          PERMISSIONS.SleepAnalysis,
-          PERMISSIONS.StepCount,
-          PERMISSIONS.Steps,
-          PERMISSIONS.Weight,
-          PERMISSIONS.BodyFatPercentage,
+          "ActiveEnergyBurned",
+          "AppleExerciseTime",
+          "BasalEnergyBurned",
+          "BiologicalSex",
+          "BloodGlucose",
+          "BloodPressureDiastolic",
+          "BloodPressureSystolic",
+          "BodyFatPercentage",
+          "BodyMass",
+          "BodyMassIndex",
+          "BodyTemperature",
+          "DateOfBirth",
+          "Biotin",
+          "Caffeine",
+          "Calcium",
+          "Carbohydrates",
+          "Chloride",
+          "Cholesterol",
+          "Copper",
+          "EnergyConsumed",
+          "FatMonounsaturated",
+          "FatPolyunsaturated",
+          "FatSaturated",
+          "FatTotal",
+          "Fiber",
+          "Folate",
+          "Iodine",
+          "Iron",
+          "Magnesium",
+          "Manganese",
+          "Molybdenum",
+          "Niacin",
+          "PantothenicAcid",
+          "Phosphorus",
+          "Potassium",
+          "Protein",
+          "Riboflavin",
+          "Selenium",
+          "Sodium",
+          "Sugar",
+          "Thiamin",
+          "VitaminA",
+          "VitaminB12",
+          "VitaminB6",
+          "VitaminC",
+          "VitaminD",
+          "VitaminE",
+          "VitaminK",
+          "Zinc",
+          "Water",
+          "DistanceCycling",
+          "DistanceSwimming",
+          "DistanceWalkingRunning",
+          "FlightsClimbed",
+          "HeartRate",
+          "Height",
+          "LeanBodyMass",
+          "MindfulSession",
+          "NikeFuel",
+          "RespiratoryRate",
+          "SleepAnalysis",
+          "StepCount",
+          "Steps",
+          "Weight",
+          "Workout"
         ],
       },
     };
@@ -71,6 +115,8 @@ const getHealthData = () => {
 const send = data =>
   new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
+    console.log("SENDING", data);
+    return resolve();
     request.open('POST', ENDPOINT, true);
     request.addEventListener('load', () =>
       resolve(JSON.parse(request.responseText).url),
@@ -119,10 +165,11 @@ const App: () => React$Node = () => {
       },
     );
   }, []);
-  const saveData = () => {
+  const saveData = (force = false) => {
     if (lastTriggered) {
       if (new Date().getTime() - new Date(lastTriggered).getTime() < 82800000)
-        return;
+        if (!force)
+          return;
     }
     setWorking(true);
     getHealthData()
@@ -173,7 +220,7 @@ const App: () => React$Node = () => {
                   )}
                 </Text>
               )}
-              <Button onPress={saveData} title="Trigger" />
+              <Button onPress={() => saveData(true)} title="Trigger" />
             </View>
           </View>
         </ScrollView>

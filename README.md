@@ -10,6 +10,12 @@ For me, it powers [Life Data](https://github.com/AnandChowdhary/life-data) where
 - Send JSON data to any webhook
 - Runs in the background, once every day
 
+## Development
+
+**Notes:**
+
+Because of [terrillo/rn-apple-healthkit#125](https://github.com/terrillo/rn-apple-healthkit/issues/125), you have to manually edit a file in `node_modules` before linking.
+
 ## 📄 License
 
 - Code: [MIT](https://github.com/AnandChowdhary/yoga/blob/master/LICENSE)

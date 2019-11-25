@@ -43,6 +43,7 @@ export const getAlLData = () =>
       .then(() => getData('getHeightSamples'))
       .then(() => getData('getRespiratoryRateSamples'))
       .then(() => getData('getWeightSamples'))
+      .then(() => getData('getSleepSamples'))
       .then(() =>
         getData('getSamples', {type: 'Walking'}, 'getSamples_Walking'),
       )

@@ -34,9 +34,10 @@ target 'yoga' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RCTAppleHealthKit', :path => '../node_modules/rn-apple-healthkit'
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'RCTAppleHealthKit', :path => '../node_modules/rn-apple-healthkit'
 
   target 'yogaTests' do
     inherit! :search_paths
