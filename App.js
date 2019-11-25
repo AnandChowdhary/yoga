@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppleHealthKit from 'rn-apple-healthkit';
-const ENDPOINT = "http://services.anandchowdhary.now.sh/api/get-user";
+const ENDPOINT = 'http://services.anandchowdhary.now.sh/api/get-user';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getAlLData} from './healthkit';
 const PERMISSIONS = AppleHealthKit.Constants.Permissions;
@@ -79,22 +79,24 @@ const App: () => React$Node = () => {
   }, []);
   const saveData = () => {
     getHealthData()
-      .then(data => fetch({
-        method: "POST",
-        url: ENDPOINT,
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }))
+      .then(data =>
+        fetch({
+          method: 'POST',
+          url: ENDPOINT,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }),
+      )
       .then(() => setLastTriggered(new Date()))
       .then(() =>
         AsyncStorage.setItem('lastTriggered', new Date().getTime().toString()),
       )
       .catch(error => {
-        console.log("ERROR", error);
-        alert("I got an error in saving this data");
+        console.log('ERROR', error);
+        alert('I got an error in saving this data');
       });
   };
   return (
