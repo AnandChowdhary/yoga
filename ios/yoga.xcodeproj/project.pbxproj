@@ -650,6 +650,7 @@
 				DEVELOPMENT_TEAM = 7F544XGF2W;
 				INFOPLIST_FILE = yoga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -671,6 +672,7 @@
 				DEVELOPMENT_TEAM = 7F544XGF2W;
 				INFOPLIST_FILE = yoga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
