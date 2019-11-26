@@ -33,22 +33,37 @@ export const getAlLData = () =>
       });
     Promise.resolve()
       .then(() => getData('getBasalEnergyBurned'))
+      .catc(() => {})
       .then(() => getData('getActiveEnergyBurned'))
+      .catc(() => {})
       .then(() => getData('getBloodGlucoseSamples'))
+      .catc(() => {})
       .then(() => getData('getBloodPressureSamples'))
+      .catc(() => {})
       .then(() => getData('getBodyTemperatureSamples'))
+      .catc(() => {})
       .then(() => getData('getDailyDistanceCyclingSamples'))
+      .catc(() => {})
       .then(() => getData('getDailyDistanceWalkingRunningSamples'))
+      .catc(() => {})
       .then(() => getData('getDailyFlightsClimbedSamples'))
+      .catc(() => {})
       .then(() => getData('getDailyStepCountSamples'))
+      .catc(() => {})
       .then(() => getData('getHeartRateSamples'))
+      .catc(() => {})
       .then(() => getData('getHeightSamples'))
+      .catc(() => {})
       .then(() => getData('getRespiratoryRateSamples'))
+      .catc(() => {})
       .then(() => getData('getWeightSamples'))
+      .catc(() => {})
       .then(() => getData('getSleepSamples'))
+      .catc(() => {})
       .then(() =>
         getData('getSamples', {type: 'Walking'}, 'getSamples_Walking'),
       )
+      .catc(() => {})
       .then(() =>
         getData(
           'getSamples',
@@ -56,12 +71,15 @@ export const getAlLData = () =>
           'getSamples_StairClimbing',
         ),
       )
+      .catc(() => {})
       .then(() =>
         getData('getSamples', {type: 'Running'}, 'getSamples_Running'),
       )
+      .catc(() => {})
       .then(() =>
         getData('getSamples', {type: 'Cycling'}, 'getSamples_Cycling'),
       )
+      .catc(() => {})
       .then(() => resolve(result))
       .catch(error => reject(error));
   });
