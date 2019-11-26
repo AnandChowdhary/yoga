@@ -33,37 +33,37 @@ export const getAlLData = () =>
       });
     Promise.resolve()
       .then(() => getData('getBasalEnergyBurned'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getActiveEnergyBurned'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getBloodGlucoseSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getBloodPressureSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getBodyTemperatureSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getDailyDistanceCyclingSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getDailyDistanceWalkingRunningSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getDailyFlightsClimbedSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getDailyStepCountSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getHeartRateSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getHeightSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getRespiratoryRateSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getWeightSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() => getData('getSleepSamples'))
-      .catc(() => {})
+      .catch(() => {})
       .then(() =>
         getData('getSamples', {type: 'Walking'}, 'getSamples_Walking'),
       )
-      .catc(() => {})
+      .catch(() => {})
       .then(() =>
         getData(
           'getSamples',
@@ -71,15 +71,15 @@ export const getAlLData = () =>
           'getSamples_StairClimbing',
         ),
       )
-      .catc(() => {})
+      .catch(() => {})
       .then(() =>
         getData('getSamples', {type: 'Running'}, 'getSamples_Running'),
       )
-      .catc(() => {})
+      .catch(() => {})
       .then(() =>
         getData('getSamples', {type: 'Cycling'}, 'getSamples_Cycling'),
       )
-      .catc(() => {})
+      .catch(() => {})
       .then(() => resolve(result))
       .catch(error => reject(error));
   });
