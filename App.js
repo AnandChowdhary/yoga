@@ -116,9 +116,7 @@ const send = data =>
   new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
     request.open('POST', ENDPOINT, true);
-    request.addEventListener('load', () =>
-      resolve(JSON.parse(request.responseText).url),
-    );
+    request.addEventListener('load', () => resolve());
     request.addEventListener('error', () => reject('response_not_ok'));
     request.addEventListener('abort', () => reject('upload_aborted'));
     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
