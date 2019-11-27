@@ -1,4 +1,4 @@
-import AppleHealthKit from 'rn-apple-healthkit';
+import AppleHealthKit from './rn-apple-healthkit';
 
 const getDailyInfo = (func, params) =>
   new Promise((resolve, reject) => {
